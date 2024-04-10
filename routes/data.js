@@ -3,7 +3,6 @@ const router = express.Router({ mergeParams: true });
 
 
 const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-const fakeHtml = "[https://photos.zillowstatic.com/fp/288deff7395d3be97595138a3f0570d6-p_e.jpg] [https://www.zillow.com/homedetails/304-Reachcliff-Dr-Shepherdstown-WV-25443/63190810_zpid/]304 Reachcliff Dr, Shepherdstown, WV 25443 [https://photos.zillowstatic.com/fp/9393ca396fd4f293a41ad2f8224d1f0a-p_e.jpg] [https://www.zillow.com/homedetails/304-Reachcliff-Dr-Shepherdstown-WV-25443/63190810_zpid/]304 Reachcliff Dr, Shepherdstown, WV 25443 [https://photos.zillowstatic.com/fp/7b90431e253de9a2897febc48080ebe7-p_e.jpg] [https://www.zillow.com/homedetails/304-Reachcliff-Dr-Shepherdstown-WV-25443/63190810_zpid/]Use arrow keys to navigateImage 1 of 89 [https://photos.zillowstatic.com/fp/eb13c87749392d5665c2913fe8dff828-p_e.jpg] [https://www.zillow.com/homedetails/42089-Trengwinton-Pl-Leesburg-VA-20176/123978266_zpid/]42089 Trengwinton Pl, Leesburg, VA 20176 [https://photos.zillowstatic.com/fp/b886b6626efd6804bf04851cf99bfc94-p_e.jpg] [https://www.zillow.com/homedetails/42089-Trengwinton-Pl-Leesburg-VA-20176/123978266_zpid/]42089 Trengwinton Pl, Leesburg, VA 20176 [https://photos.zillowstatic.com/fp/14441c88534282531df7cad554b07b80-p_e.jpg] [https://www.zillow.com/homedetails/42089-Trengwinton-Pl-Leesburg-VA-20176/123978266_zpid/]Use arrow keys to navigateImage 1 of 82* LoadingLoading..."
 
 router.post("/links",(req,res) => {
     console.log("here")
@@ -19,6 +18,8 @@ router.post("/links",(req,res) => {
 
 router.post("/",(req,res) => {
     const {html,url} = req.body;
+
+    console.log(url);
 
     const data = {};
 
@@ -40,9 +41,6 @@ router.post("/",(req,res) => {
 
     data.footage = sqft;
     data.Price_per_sqft = Math.round(data.Price / sqft);
-
-
-
 
 
     res.json(data);
