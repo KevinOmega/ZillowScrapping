@@ -15,7 +15,7 @@ router.get("/links",(req,res) => {
             links.push(baseLink + state + "/" + (index + 1) + "_p/")
         }
      } );
-     res.json(links);
+     res.json({links : links});
 })
 
 router.post("/links",(req,res) => {
