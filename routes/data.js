@@ -1,8 +1,22 @@
 const express = require("express");
+const { states } = require("../urls");
 const router = express.Router({ mergeParams: true });
 
 
 const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+
+
+router.get("/links",(req,res) => {
+    const baseLink = "https://www.zillow.com/"
+    
+    const links = []
+     states.map((state) =>{
+        for (let index = 0; index < 3; index++) {
+            links.push(baseLink + state + "/" + (index + 1) + "_p/")
+        }
+     } );
+     res.json(links);
+})
 
 router.post("/links",(req,res) => {
     console.log("here")

@@ -6,6 +6,8 @@ const data = require("./data");
 /* GET home page. */
 module.exports = function(app){
   router.use("/data",data)
+
+
   app.use("/api",router);
 }
 
