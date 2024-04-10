@@ -11,7 +11,7 @@ router.get("/links",(req,res) => {
     
     const links = []
      states.map((state) =>{
-        for (let index = 0; index < 3; index++) {
+        for (let index = 0; index < 10; index++) {
             links.push(baseLink + state + "/" + (index + 1) + "_p/")
         }
      } );
