@@ -6,11 +6,11 @@ const fakeHtml = "[https://photos.zillowstatic.com/fp/288deff7395d3be97595138a3f
 
 router.post("/",(req,res) => {
     console.log("here")
-    // const {html} = req.body;
-    // console.log(html);
+    const {html} = req.body;
+    console.log(html);
 
     const regex = /\[(https:\/\/www.zillow.com\/homedetails\/.*?)]/g;
-    const rawLinks = fakeHtml.match(regex);
+    const rawLinks = html.match(regex);
     const links = [...new Set(rawLinks)]
 
     res.json({links : links.map((link) => link.replace(/\[|\]/g,""))});
