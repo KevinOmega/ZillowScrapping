@@ -37,24 +37,27 @@ router.post("/",(req,res) => {
 
     const data = {};
 
-    // const priorityRawData = html.split(",");
-    // console.log(priorityRawData);
-    const price = html.match(/\$(\d{1,3},\d{3},\d{1,3}|\d{3},\d{3}|\d{1,3})/)[1].replaceAll(",","");
-    console.log(price);
-    data.Price = Number(price);
-    // data.Price = Number(price.split(",").join(""));
-    data.Baths = Number(html.match(/(\d)baths/)[1]);
-    data.Beds = Number(html.match(/(\d)beds/)[1]);
+ 
+    const price = html.match(/\$(\d{1,3},\d{3},\d{3}|\d{1,3},\d{3}| \d{1,3})/);
+    console.log(price,"price");
+    data.Price = price ? Number(price[1].replaceAll(",","")) : 50000;
+    const baths = html.match(/(\d)baths/)
+    console.log(baths);
+    data.Baths = baths ? Number(baths[1]) : 0;
+    const beds = html.match(/(\d)beds/);
+    console.log(beds);
+    data.Beds = beds ? Number(beds[1]) : 0;
     data.Address = url.match(/\/(\d+.*?)\//)[1];
+    console.log(data.Address);
     data.State = data.Address.match(/-\w*-([A-Z][A-Z])-\d+$/)[1];
     data.City = data.Address.match(/-(\w+)-[A-Z][A-Z]-\d+$/)[1];
     const rawType = html.match(/pre-qualified([\w]+)Built/i);
     data.Type = rawType ? rawType[1] :"SINGLE FAMILY"
     data.Date_Scrapped = days[new Date().getDay()] + " " + new Date().toLocaleDateString();
-    const sqft = Number(html.match(/(\d{1,3},\d{3}|\d{1,3})sqft/)[1].replace(",",""));
+    const sqft = html.match(/(\d{1,3},\d{3}|\d{1,3})sqft/)
 
-    data.footage = sqft;
-    data.Price_per_sqft = Math.round(data.Price / sqft);
+    data.footage = sqft ? Number(sqft[1].replace(",","")): Math.round(data.Price /20);
+    data.Price_per_sqft = Math.round(data.Price / data.footage);
 
 
     res.json(data);
