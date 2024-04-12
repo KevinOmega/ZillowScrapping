@@ -56,7 +56,7 @@ router.post("/",(req,res) => {
     data.Date_Scrapped = days[new Date().getDay()] + " " + new Date().toLocaleDateString();
     const sqft = html.match(/(\d{1,3},\d{3}|\d{1,3})sqft/)
 
-    data.footage = sqft ? Number(sqft[1].replace(",","")): Math.round(data.Price /20);
+    data.footage = sqft ? Number(sqft[1].replace(",","")): Math.round(data.Price /150);
     data.Price_per_sqft = Math.round(data.Price / data.footage);
 
 
